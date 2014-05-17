@@ -12,4 +12,4 @@ get '/hi/:name' do |name|
     "Hello #{name}!"
 end
 
-match('GET /hi/Bob HTTP/1.1')
+match('GET /hi/Bob/ HTTP/1.1')
