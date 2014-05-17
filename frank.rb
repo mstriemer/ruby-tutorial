@@ -26,8 +26,10 @@ end
 
 @routes = []
 
-def get(path, &block)
-  @routes << Route.new('get', path, block)
+%w[get post put delete patch].each do |method|
+  define_method method do |path, &block|
+    @routes << Route.new(method, path, block)
+  end
 end
 
 def match(request)
