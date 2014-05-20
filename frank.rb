@@ -1,3 +1,5 @@
+require './server'
+
 class Route
   attr_accessor :method, :path, :path_regex, :block
 
@@ -32,8 +34,11 @@ end
   end
 end
 
-def match(request)
-  method, path = request.split(' ')[0,2]
-  method.downcase!
-  puts @routes.find { |route| route.match(method, path) }.call(path)
+def match(method, path)
+  route = @routes.find { |route| route.match(method, path) }
+  if route
+    route.call(path)
+  else
+    raise Http404, "no route matching #{method} #{path}"
+  end
 end

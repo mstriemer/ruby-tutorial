@@ -23,8 +23,6 @@ post '/hi/:name' do |name|
   "Hello #{name}!"
 end
 
-match('GET /hi/all HTTP/1.1')
-match('POST /hi/Emily HTTP/1.1')
-match('POST /hi/Zoe HTTP/1.1')
-match('POST /hi/Lily HTTP/1.1')
-match('GET /hi/all HTTP/1.1')
+HttpServer.new(2000) do |method, path|
+    match(method, path)
+end
