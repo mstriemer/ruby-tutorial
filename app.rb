@@ -11,7 +11,7 @@ get '/bye' do
 end
 
 get '/hi/all' do
-    "Hello #{@names.join(', ')}!"
+  "Hello #{@names.join(', ')}!"
 end
 
 get '/hi/:name' do |name|
@@ -24,5 +24,5 @@ post '/hi/:name' do |name|
 end
 
 HttpServer.new(2000) do |method, path|
-    match(method, path)
+  match(method, path)
 end
