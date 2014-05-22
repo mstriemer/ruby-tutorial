@@ -13,7 +13,7 @@ jQuery(function ($) {
 
     function displayPullRequests(repoName) {
         var url = prUrlTemplate.replace('{repoName}', repoName);
-        $.getJSON(url).always(function () {
+        $.getJSON(url, {sort: 'updated', direction: 'desc'}).always(function () {
             $prResults.empty();
         }).done(function (data, textStatus, jqXHR) {
             data.forEach(function (pullRequest) {
@@ -32,9 +32,15 @@ jQuery(function ($) {
         });
     }
 
+    function setHash(repoName) {
+        location.hash = repoName;
+    }
+
     $('#repo-name').on('change', function () {
         var repoName = $(this).val();
         setTitleForRepo(repoName);
         displayPullRequests(repoName);
-    });
+        setHash(repoName);
+    }).val(location.hash.slice(1)).trigger('change');
+
 });
