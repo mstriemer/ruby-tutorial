@@ -35,8 +35,7 @@ end
 end
 
 def match(method, path)
-  route = @routes.find { |route| route.match(method, path) }
-  if route
+  if route = @routes.find { |r| r.match(method, path) }
     route.call(path)
   else
     raise Http404, "no route matching #{method} #{path}"
