@@ -1,6 +1,4 @@
-require './frank'
-
-@names = []
+Names = []
 
 get '/hi' do
   "Hello World!"
@@ -11,7 +9,7 @@ get '/bye' do
 end
 
 get '/hi/all' do
-  "Hello #{@names.join(', ')}!"
+  "Hello #{Names.join(', ')}!"
 end
 
 get '/hi/:name' do |name|
@@ -19,10 +17,6 @@ get '/hi/:name' do |name|
 end
 
 post '/hi/:name' do |name|
-  @names << name
+  Names << name
   "Hello #{name}!"
-end
-
-HttpServer.new(2000) do |method, path|
-  match(method, path)
 end
